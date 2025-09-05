@@ -1,1 +1,119 @@
+import processing.serial.*;
+import cc.arduino.*;
+Arduino arduino;
 
+public void setup() {
+  size(500, 500);
+  arduino = new Arduino(this, Arduino.list()[0], 57600); 
+  //change the [0] to a [1] or [2] etc. if your program doesn't work
+}
+
+public void draw() {
+  background(192);
+  int x = arduino.analogRead(5);
+  System.out.println(x);
+
+  if(x<100){
+     //legs
+fill(255,0,0);
+ellipse(160,350,75,130);
+ellipse(240,350,75,130);
+//arms
+pushMatrix();
+rotate(PI/8);
+ellipse(190,150,80,200);
+rotate(7.1*PI/4);
+ellipse(200,290,80,200);
+popMatrix();
+//body
+noStroke();
+fill(255,0,0);
+ellipse(200,250,200,200);
+ellipse (200,180,150,170);
+//head
+  fill(0,0,0);
+stroke(0,0,0);
+ellipse(200,90,90,65);
+//face
+fill(0,0,0);
+ellipse(180,90,13,13);
+ellipse(220,90,13,13);
+line(180,90,220,90);
+//power button
+fill(255,0,0);
+ellipse(230,160,25,25);
+fill(255,255,255);
+line(237,160,242,160);
+line(217,160,222,160);
+line(226,155,233,155);
+line(222,160,226,155);
+line(233,155,237,160);
+  } else {
+  //legs
+fill(251,251,251);
+ellipse(160,350,75,130);
+ellipse(240,350,75,130);
+//arms
+pushMatrix();
+rotate(PI/8);
+ellipse(190,150,80,200);
+rotate(7.1*PI/4);
+ellipse(200,290,80,200);
+popMatrix();
+//body
+noStroke();
+fill(255,255,255);
+ellipse(200,250,200,200);
+ellipse (200,180,150,170);
+//head
+  fill(255,255,255);
+stroke(0,0,0);
+ellipse(200,90,90,65);
+//face
+fill(0,0,0);
+ellipse(180,90,13,13);
+ellipse(220,90,13,13);
+line(180,90,220,90);
+//power button
+fill(255,255,255);
+ellipse(230,160,25,25);
+line(237,160,242,160);
+line(217,160,222,160);
+line(226,155,233,155);
+line(222,160,226,155);
+line(233,155,237,160);
+  }
+if (x<100){
+  //stomach armor
+fill(191,0,255);
+rect(x+150,200,100,110);
+quad(x+250,200,x+250,310,x+280,275,x+280,235);
+quad(x+120,275,x+120,235,x+150,200,x+150,310);
+
+//head
+  fill(255,255,255);
+stroke(0,0,0);
+ellipse(200,90,90,65);
+//face
+fill(0,0,0);
+ellipse(180,90,13,13);
+ellipse(220,90,13,13);
+line(180,90,220,90);
+//helmet
+fill(255,0,0);
+ellipse(x+200,90,90,65);
+fill(255,255,255);
+arc(x+200,81,70,50,0,PI);
+} 
+if ( x<50){
+  //face
+fill(0,0,0);
+ellipse(180,90,13,13);
+ellipse(220,90,13,13);
+line(180,90,220,90);
+//mad baymax eyes
+  fill(255,0,0);
+  ellipse(180,90,10,10);
+ellipse(220,90,10,10);
+}
+}
